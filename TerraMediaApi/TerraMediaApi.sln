@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.36105.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraMedia.Api", "TerraMediaApi\TerraMedia.Api.csproj", "{874A6CBD-75EF-4FBE-96FE-59BD04660CFB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{292CD188-F432-41E7-B728-77EDA5EB622A} = {292CD188-F432-41E7-B728-77EDA5EB622A}
+		{5111519E-38BC-4495-9C06-DAD147CED467} = {5111519E-38BC-4495-9C06-DAD147CED467}
+		{BD51391C-3474-4736-A6CD-EB6B7F0936C3} = {BD51391C-3474-4736-A6CD-EB6B7F0936C3}
+		{C421E080-A1A3-4E79-83E2-02756B97A002} = {C421E080-A1A3-4E79-83E2-02756B97A002}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraMedia.Domain", "TerraMedia.Domain\TerraMedia.Domain.csproj", "{C421E080-A1A3-4E79-83E2-02756B97A002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraMedia.Application", "TerraMedia.Application\TerraMedia.Application.csproj", "{5111519E-38BC-4495-9C06-DAD147CED467}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraMedia.Infrastructure", "TerraMedia.Infrastructure\TerraMedia.Infrastructure.csproj", "{292CD188-F432-41E7-B728-77EDA5EB622A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C421E080-A1A3-4E79-83E2-02756B97A002} = {C421E080-A1A3-4E79-83E2-02756B97A002}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraMedia.Integration", "TerraMedia.Integration\TerraMedia.Integration.csproj", "{BD51391C-3474-4736-A6CD-EB6B7F0936C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5111519E-38BC-4495-9C06-DAD147CED467} = {5111519E-38BC-4495-9C06-DAD147CED467}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{874A6CBD-75EF-4FBE-96FE-59BD04660CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874A6CBD-75EF-4FBE-96FE-59BD04660CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874A6CBD-75EF-4FBE-96FE-59BD04660CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874A6CBD-75EF-4FBE-96FE-59BD04660CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C421E080-A1A3-4E79-83E2-02756B97A002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C421E080-A1A3-4E79-83E2-02756B97A002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C421E080-A1A3-4E79-83E2-02756B97A002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C421E080-A1A3-4E79-83E2-02756B97A002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5111519E-38BC-4495-9C06-DAD147CED467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5111519E-38BC-4495-9C06-DAD147CED467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5111519E-38BC-4495-9C06-DAD147CED467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5111519E-38BC-4495-9C06-DAD147CED467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{292CD188-F432-41E7-B728-77EDA5EB622A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292CD188-F432-41E7-B728-77EDA5EB622A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292CD188-F432-41E7-B728-77EDA5EB622A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292CD188-F432-41E7-B728-77EDA5EB622A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD51391C-3474-4736-A6CD-EB6B7F0936C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD51391C-3474-4736-A6CD-EB6B7F0936C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD51391C-3474-4736-A6CD-EB6B7F0936C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD51391C-3474-4736-A6CD-EB6B7F0936C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A76CCB6A-8DA2-4676-B18D-D2778CA4FABD}
+	EndGlobalSection
+EndGlobal

@@ -1,11 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace TerraMedia.Domain.Settings;
 
-namespace TerraMedia.Domain.Settings
+public class AuthorizeSettings
 {
-    [ExcludeFromCodeCoverage]
-    public class AuthorizeSettings
-    {
-        public string Secret { get; set; } = string.Empty;
-        public int Expires { get; set; }
-    }
+    public string Secret { get; set; } = string.Empty;
+    public int Expires { get; set; }
 }

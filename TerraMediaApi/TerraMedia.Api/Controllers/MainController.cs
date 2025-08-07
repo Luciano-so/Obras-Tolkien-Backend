@@ -18,6 +18,5 @@ public class MainController : ControllerBase
             }
             return _UserId;
         }
-
     }
 }

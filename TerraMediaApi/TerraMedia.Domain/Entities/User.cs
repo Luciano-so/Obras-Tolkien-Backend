@@ -52,8 +52,8 @@ public class User : Entity
                 CreatedAt = DateTime.UtcNow,
             };
             user.Activate();
-            user.Encrypt();
             user.Validate();
+            user.Encrypt();
             return user;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using TerraMedia.Domain.Base;
+using TerraMedia.Domain.Exceptions;
 using TerraMedia.Domain.Validations;
 
 namespace TerraMedia.Domain.Entities;
@@ -17,6 +18,8 @@ public class BookComment : Entity
 
     public override void Validate()
     {
+        Validation.ValidateIfEqual(Guid.Empty, UserId, "O campo Usuário não pode estar vazio.");
+
         Validation.ValidateIfNull(UserId, "O campo Usuário não pode estar vazio.");
         Validation.ValidateIfNull(BookId, "O campo Livro não pode estar vazio.");
 
@@ -41,7 +44,7 @@ public class BookComment : Entity
         public static BookComment Create(Guid userId, Book book, string comment)
         {
             var date = GenerateDate();
-
+            Validation.ValidateIfNull(book, "O campo Livro não pode estar vazio.");
             var info = new BookComment
             {
                 UserId = userId,

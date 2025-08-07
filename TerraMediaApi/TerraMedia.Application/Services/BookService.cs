@@ -25,7 +25,7 @@ public class BookService : IBookService
         if (existingBook != null)
         {
             var mappedCommentDto = _mapper.Map<CommentDto>(commentDto);
-            return await AddCommentToExistingBookAsync(existingBook.CoverId, userId, mappedCommentDto);
+            return await AddCommentToExistingBookAsync(existingBook.Id, userId, mappedCommentDto);
         }
 
         var book = Book.Factory.Create(coverId);
@@ -38,11 +38,9 @@ public class BookService : IBookService
         return await GetBookDtoByIdAsync(book.Id);
     }
 
-    public async Task<BookDto> AddCommentToExistingBookAsync(int coverId, Guid userId, CommentDto commentDto)
+    public async Task<BookDto> AddCommentToExistingBookAsync(Guid bookId, Guid userId, CommentDto commentDto)
     {
-        var book = await _repository.GetBook(coverId);
-        if (book is null)
-            throw new Exception("Livro não encontrado.");
+        var book = await GetBookOrThrowAsync(bookId);
 
         await _rulesService.IsAllowedToCommentAsync(userId, book);
 
@@ -65,8 +63,6 @@ public class BookService : IBookService
         existingComment.UpdateComment(commentDto.Comment);
 
         await _repository.UnitOfWork.Commit();
-
-        var updatedBook = await _repository.GetByIdWithCommentsAsync(bookId);
         return await GetBookDtoByIdAsync(bookId);
     }
 
@@ -80,9 +76,18 @@ public class BookService : IBookService
         return await GetBookDtoByIdAsync(bookId);
     }
 
-    public async Task<BookDto> GetByIdWithCommentsAsync(Guid bookId)
+    public async Task<BookDto> GetByIdWithCommentsAsync(int coverId)
     {
-        return await GetBookDtoByIdAsync(bookId);
+        var book = await _repository.GetBook(coverId);
+        var dto = _mapper.Map<BookDto>(book);
+        if (dto?.Comments != null)
+        {
+            dto.Comments = dto.Comments
+                .OrderByDescending(c => c.UpdatedAt)
+                .Select((c, i) => { c.IsNew = i < 2; return c; })
+                .ToList();
+        }
+        return dto;
     }
 
     private async Task<Book> GetBookOrThrowAsync(Guid bookId)

@@ -16,8 +16,8 @@ public class OpenLibraryController : ControllerBase
     private readonly IOpenLibraryService _service;
     public OpenLibraryController(IOpenLibraryService service) => _service = service;
 
+    [Authorize]
     [HttpGet("search")]
-    [AllowAnonymous]
     [SwaggerOperation(Summary = "Busca livros por autor",
                       Description = "Busca livros na OpenLibrary filtrando por autor com paginação.")]
     [SwaggerResponse((int)HttpStatusCode.OK, "Busca realizada com sucesso", typeof(ReponseDto<OpenLibrarySearchDto>))]
@@ -31,8 +31,8 @@ public class OpenLibraryController : ControllerBase
         return Ok(ReponseDto.Create(HttpStatusCode.OK, "Busca realizada com sucesso", result));
     }
 
+    [Authorize]
     [HttpGet("{authorKey}/bio")]
-    [AllowAnonymous]
     [SwaggerOperation(
         Summary = "Busca a biografia do autor",
         Description = "Obtém a biografia do autor a partir da chave (authorKey) na OpenLibrary."

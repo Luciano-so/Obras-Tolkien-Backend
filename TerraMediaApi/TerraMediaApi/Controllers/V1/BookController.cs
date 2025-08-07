@@ -28,14 +28,14 @@ public class BooksController : MainController
     }
 
     [Authorize]
-    [HttpPost("{coverId:guid}/add-comment")]
+    [HttpPost("{bookId:guid}/add-comment")]
     [SwaggerOperation(Summary = "Adiciona um comentário a um livro existente",
                       Description = "Adiciona um novo comentário ao livro identificado pelo BookId.")]
     [SwaggerResponse((int)HttpStatusCode.OK, "Comentário cadastrado com sucesso", typeof(ReponseDto<BookDto>))]
     [SwaggerResponse((int)HttpStatusCode.NotFound, "Livro não encontrado")]
-    public async Task<IActionResult> AddComment(int coverId, [FromBody] CommentDto commentDto)
+    public async Task<IActionResult> AddComment(Guid bookId, [FromBody] CommentDto commentDto)
     {
-        var result = await _service.AddCommentToExistingBookAsync(coverId, UserId, commentDto);
+        var result = await _service.AddCommentToExistingBookAsync(bookId, UserId, commentDto);
         return Ok(ReponseDto.Create(HttpStatusCode.OK, "Comentário cadastrado com sucesso", result));
     }
 
@@ -63,15 +63,16 @@ public class BooksController : MainController
         return Ok(ReponseDto.Create(HttpStatusCode.NoContent, "Comentário removido com sucesso"));
     }
 
+
+    [HttpGet("{coverId:int}")]
     [Authorize]
-    [HttpGet("{bookId:guid}")]
     [SwaggerOperation(Summary = "Obtém um livro com seus comentários",
                       Description = "Retorna o livro identificado pelo BookId junto com seus comentários ativos.")]
     [SwaggerResponse((int)HttpStatusCode.OK, "Informações carregadas com sucesso.", typeof(ReponseDto<BookDto>))]
     [SwaggerResponse((int)HttpStatusCode.NotFound, "Livro não encontrado")]
-    public async Task<IActionResult> GetBook(Guid bookId)
+    public async Task<IActionResult> GetBook(int coverId)
     {
-        var result = await _service.GetByIdWithCommentsAsync(bookId);
+        var result = await _service.GetByIdWithCommentsAsync(coverId);
         if (result == null)
             return NotFound(ReponseDto.Create(HttpStatusCode.NotFound, "Livro não encontrado."));
 

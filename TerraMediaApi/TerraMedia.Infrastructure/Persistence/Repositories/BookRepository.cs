@@ -14,7 +14,7 @@ public class BookRepository : IBookRepository
     public BookRepository(MainContext context) => _context = context;
     public async Task<Book?> GetBook(int coverId)
     {
-        return await _context.Books.FirstOrDefaultAsync(b => b.CoverId == coverId);
+        return await _context.Books.Include(t => t.Comments).ThenInclude(t => t.User).FirstOrDefaultAsync(b => b.CoverId == coverId);
     }
     public async Task<Book?> GetByIdWithCommentsAsync(Guid bookId)
     {

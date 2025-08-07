@@ -1,71 +1,102 @@
-# Obras-Tolkien-Backend
+# 🏰 Obras-Tolkien-Backend
 
-## Sobre o Projeto
+## 📖 Sobre o Projeto
 
-Este backend foi desenvolvido para gerenciar obras relacionadas ao universo de Tolkien, permitindo cadastro de livros, comentários, autenticação de usuários e integração com a OpenLibrary para busca de informações externas.
+Backend desenvolvido para gerenciar obras do universo de Tolkien, com funcionalidades para cadastro de livros, comentários, autenticação de usuários e integração com a OpenLibrary para busca de informações externas.
 
-Principais funcionalidades:
+### Principais funcionalidades:
 - Cadastro e autenticação de usuários
 - Gerenciamento de livros e comentários
 - Busca de livros por autor via OpenLibrary
 - Documentação via Swagger
 - Testes unitários para as principais camadas do sistema
 
-## Estrutura do Projeto
+---
 
-O projeto está organizado em múltiplas soluções e camadas, seguindo boas práticas de arquitetura:
+## 🗂️ Estrutura do Projeto
 
-- **TerraMedia.Api**: API principal, responsável pelas rotas e integração das funcionalidades.
-- **TerraMedia.Domain**: Entidades, contratos e regras de domínio.
-- **TerraMedia.Application**: Camada de aplicação, orquestrando regras de negócio.
-- **TerraMedia.Infrastructure**: Persistência de dados e integração com banco de dados.
-- **TerraMedia.Integration**: Integração com serviços externos, como a OpenLibrary.
+Organizado em múltiplas soluções e camadas, seguindo boas práticas de arquitetura:
 
-### Testes
+| Camada                   | Descrição                                           |
+|--------------------------|-----------------------------------------------------|
+| **TerraMedia.Api**       | API principal: rotas e integração das funcionalidades |
+| **TerraMedia.Domain**    | Entidades, contratos e regras de negócio             |
+| **TerraMedia.Application** | Camada de aplicação: orquestra regras de negócio     |
+| **TerraMedia.Infrastructure** | Persistência de dados e integração com banco de dados |
+| **TerraMedia.Integration** | Integração com serviços externos (ex: OpenLibrary)  |
 
-O projeto possui testes unitários implementados para as principais camadas:
+---
+
+## 🧪 Testes Unitários
+
+Testes implementados para as principais camadas:
+
 - `TerraMedia.Domain.Tests`
 - `TerraMedia.Infrastructure.Tests`
 - `TerraMedia.Integration.Tests`
 - `TerraMedia.Api.Tests`
 - `TerraMedia.Application.Tests`
 
-Para rodar os testes, utilize o comando:
-```sh
+Para executar todos os testes, rode:
+
+```bash
 dotnet test
 ```
 
-## Como rodar o projeto com Docker
+---
 
-1. Certifique-se de ter o Docker instalado em sua máquina.
-2. Na raiz do projeto, execute o comando abaixo para construir e iniciar o backend:
+## 🐳 Como rodar com Docker
 
-```sh
+1. Certifique-se de ter o Docker instalado.
+
+2. Na raiz do projeto, execute:
+
+```bash
 docker compose up --build
 ```
 
-3. O serviço estará disponível na porta `7077` por padrão.
-
-## Dificuldades encontradas
-
-Durante o desenvolvimento, uma das principais dificuldades foi a limitação da API de busca externa (OpenLibrary), que não oferece funcionalidades avançadas de ordenação dos resultados. Isso exigiu adaptações na lógica de apresentação dos dados para garantir uma melhor experiência ao usuário.
-
-## Execute todos os testes com cobertura:
-
-dotnet test TerraMedia.Api.sln --collect:"XPlat Code Coverage"
-
-## Gere o relatório de cobertura em HTML:
-
-reportgenerator "-reports:**/TestResults/*/coverage.cobertura.xml" "-targetdir:BuildReports/Report" -reporttypes:Html
-
-## Pontos pendentes
-
-Ficou faltando a finalização das funcionalidades de cadastro, alteração e exclusão de usuários.
-
-## Documentação
-
-A documentação da API pode ser acessada via Swagger em `/swagger` após iniciar o projeto.
+3. O backend estará disponível na porta padrão `7077`.
 
 ---
 
-**Observação:** O projeto segue boas práticas de separação de responsabilidades, facilitando manutenção,
+## ⚠️ Dificuldades Encontradas
+
+A API externa (OpenLibrary) possui limitações, principalmente na ordenação dos resultados, o que exigiu ajustes na lógica de apresentação para melhorar a experiência do usuário.
+Informações não padronizadas
+
+---
+
+## 📊 Cobertura de Testes
+
+Para executar os testes com coleta de cobertura:
+
+```bash
+dotnet test TerraMedia.Api.sln --collect:"XPlat Code Coverage"
+```
+
+Para gerar o relatório HTML da cobertura:
+
+```bash
+reportgenerator "-reports:**/TestResults/*/coverage.cobertura.xml" "-targetdir:BuildReports/Report" -reporttypes:Html
+```
+
+---
+
+## 🚧 Pontos Pendentes
+
+- Finalização das funcionalidades de cadastro, alteração e exclusão de usuários.
+
+---
+
+## 📚 Documentação da API
+
+Após iniciar o projeto, acesse a documentação Swagger em:
+
+```
+/swagger
+```
+
+---
+
+> **Observação:**  
+> O projeto segue boas práticas de separação de responsabilidades, facilitando a manutenção e escalabilidade.

@@ -32,7 +32,12 @@ public class UnauthorizedExceptionMiddleware
 
         var response = ReponseDto.Create(HttpStatusCode.Unauthorized, exception.Message);
 
-        var json = JsonSerializer.Serialize(response);
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
+        var json = JsonSerializer.Serialize(response, options);
 
         return context.Response.WriteAsync(json);
     }

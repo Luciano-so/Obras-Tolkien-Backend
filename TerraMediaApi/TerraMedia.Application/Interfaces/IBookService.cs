@@ -25,10 +25,10 @@ public interface IBookService
     /// <summary>
     /// Adiciona um novo comentário a um livro já existente.
     /// </summary>
-    /// <param name="bookId">Identificador único do livro.</param>
+    /// <param name="coverId">Identificador único do livro.</param>
     /// <param name="commentDto">Dados do comentário a ser adicionado.</param>
     /// <returns>Um DTO atualizado do livro com o novo comentário.</returns>
-    Task<BookDto> AddCommentToExistingBookAsync(Guid bookId, Guid userId, CommentDto commentDto);
+    Task<BookDto> AddCommentToExistingBookAsync(int coverId, Guid userId, CommentDto commentDto);
 
     /// <summary>
     /// Cria um novo livro e adiciona um comentário inicial a ele.

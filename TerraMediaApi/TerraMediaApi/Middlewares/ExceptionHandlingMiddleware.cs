@@ -30,8 +30,12 @@ public class ExceptionHandlingMiddleware
             context.Response.ContentType = "application/json";
 
             var response = ReponseDto.Create(HttpStatusCode.BadRequest, ex.Message);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
 
-            var json = JsonSerializer.Serialize(response);
+            var json = JsonSerializer.Serialize(response, options);
             await context.Response.WriteAsync(json);
         }
         catch (Exception ex)

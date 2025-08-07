@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace TerraMedia.Domain.Exceptions;
+﻿namespace TerraMedia.Domain.Exceptions;
 
 [Serializable]
 public class DomainException : Exception

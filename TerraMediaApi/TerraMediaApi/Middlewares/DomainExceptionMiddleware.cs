@@ -32,8 +32,13 @@ public class DomainExceptionMiddleware
         context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
         var response = ReponseDto.Create(HttpStatusCode.BadRequest, exception.Message);
+        
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
 
-        var json = JsonSerializer.Serialize(response);
+        var json = JsonSerializer.Serialize(response, options);
 
         return context.Response.WriteAsync(json);
     }

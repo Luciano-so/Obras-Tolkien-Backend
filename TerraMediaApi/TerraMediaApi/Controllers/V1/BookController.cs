@@ -28,14 +28,14 @@ public class BooksController : MainController
     }
 
     [Authorize]
-    [HttpPost("{bookId:guid}/add-comment")]
+    [HttpPost("{coverId:guid}/add-comment")]
     [SwaggerOperation(Summary = "Adiciona um comentário a um livro existente",
                       Description = "Adiciona um novo comentário ao livro identificado pelo BookId.")]
     [SwaggerResponse((int)HttpStatusCode.OK, "Comentário cadastrado com sucesso", typeof(ReponseDto<BookDto>))]
     [SwaggerResponse((int)HttpStatusCode.NotFound, "Livro não encontrado")]
-    public async Task<IActionResult> AddComment(Guid bookId, [FromBody] CommentDto commentDto)
+    public async Task<IActionResult> AddComment(int coverId, [FromBody] CommentDto commentDto)
     {
-        var result = await _service.AddCommentToExistingBookAsync(bookId, UserId, commentDto);
+        var result = await _service.AddCommentToExistingBookAsync(coverId, UserId, commentDto);
         return Ok(ReponseDto.Create(HttpStatusCode.OK, "Comentário cadastrado com sucesso", result));
     }
 

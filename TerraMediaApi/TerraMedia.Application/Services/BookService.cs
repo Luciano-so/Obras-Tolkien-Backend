@@ -25,7 +25,7 @@ public class BookService : IBookService
         if (existingBook != null)
         {
             var mappedCommentDto = _mapper.Map<CommentDto>(commentDto);
-            return await AddCommentToExistingBookAsync(existingBook.Id, userId, mappedCommentDto);
+            return await AddCommentToExistingBookAsync(existingBook.CoverId, userId, mappedCommentDto);
         }
 
         var book = Book.Factory.Create(coverId);
@@ -38,9 +38,12 @@ public class BookService : IBookService
         return await GetBookDtoByIdAsync(book.Id);
     }
 
-    public async Task<BookDto> AddCommentToExistingBookAsync(Guid bookId, Guid userId, CommentDto commentDto)
+    public async Task<BookDto> AddCommentToExistingBookAsync(int coverId, Guid userId, CommentDto commentDto)
     {
-        var book = await GetBookOrThrowAsync(bookId);
+        var book = await _repository.GetBook(coverId);
+        if (book is null)
+            throw new Exception("Livro não encontrado.");
+
         await _rulesService.IsAllowedToCommentAsync(userId, book);
 
         var newComment = BookComment.Factory.Create(userId, book, commentDto.Comment);
@@ -49,7 +52,7 @@ public class BookService : IBookService
         await _repository.MarkCommentAsAddedAsync(newComment);
         await _repository.UnitOfWork.Commit();
 
-        return await GetBookDtoByIdAsync(bookId);
+        return await GetBookDtoByIdAsync(book.Id);
     }
 
     public async Task<BookDto> UpdateCommentAsync(Guid bookId, Guid userId, Guid commentId, CommentDto commentDto)

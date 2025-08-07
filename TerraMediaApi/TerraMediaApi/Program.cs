@@ -4,7 +4,15 @@ using TerraMedia.Api.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerConfiguration();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 builder.Services.DependencyRegister();
 builder.Services.ApplicationRegister();
 builder.Services.AuthenticationRegister(builder.Configuration);
@@ -13,7 +21,7 @@ builder.Services.AppSettingsRegister(builder.Configuration);
 builder.Services.DataBaseRegister(builder.Configuration);
 
 var app = builder.Build();
-
+app.UseCors("AllowFrontend");
 app.DataBaseRegister();
 
 if (app.Environment.IsDevelopment())

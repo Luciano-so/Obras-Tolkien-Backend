@@ -10,4 +10,6 @@ public class OpenLibraryBookDto
     public int Cover_i { get; set; }
     public string? CoverUrl { get; set; }
     public string? Cover_edition_key { get; set; }
+    public List<string>? Author_key { get; set; }
+    public string? Key { get; set; }
 }

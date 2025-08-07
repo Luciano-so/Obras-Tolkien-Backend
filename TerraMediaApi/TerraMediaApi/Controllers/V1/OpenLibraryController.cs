@@ -22,12 +22,34 @@ public class OpenLibraryController : ControllerBase
                       Description = "Busca livros na OpenLibrary filtrando por autor com paginação.")]
     [SwaggerResponse((int)HttpStatusCode.OK, "Busca realizada com sucesso", typeof(ReponseDto<OpenLibrarySearchDto>))]
     [SwaggerResponse((int)HttpStatusCode.BadRequest, "Parâmetros inválidos")]
-    public async Task<IActionResult> Search([FromQuery] string? author, [FromQuery] string? title, [FromQuery] int page = 1, [FromQuery] int limit = 10)
+    public async Task<IActionResult> Search([FromQuery] string? author, [FromQuery] int page = 1, [FromQuery] int limit = 10, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(author) && string.IsNullOrWhiteSpace(title))
-            return BadRequest(ReponseDto.Create(HttpStatusCode.BadRequest, "É necessário informar o autor ou o título."));
+        if (string.IsNullOrWhiteSpace(author))
+            return BadRequest(ReponseDto.Create(HttpStatusCode.BadRequest, "É necessário informar o autor."));
 
-        var result = await _service.SearchBooksAsync(author, title, page, limit);
+        var result = await _service.SearchBooksAsync(author, page, limit, cancellationToken);
         return Ok(ReponseDto.Create(HttpStatusCode.OK, "Busca realizada com sucesso", result));
+    }
+
+    [HttpGet("{authorKey}/bio")]
+    [AllowAnonymous]
+    [SwaggerOperation(
+        Summary = "Busca a biografia do autor",
+        Description = "Obtém a biografia do autor a partir da chave (authorKey) na OpenLibrary."
+    )]
+    [SwaggerResponse((int)HttpStatusCode.OK, "Biografia obtida com sucesso", typeof(ReponseDto<string>))]
+    [SwaggerResponse((int)HttpStatusCode.BadRequest, "Chave do autor inválida")]
+    [SwaggerResponse((int)HttpStatusCode.NotFound, "Biografia não encontrada para o autor informado")]
+    public async Task<IActionResult> GetAuthorBio(string authorKey, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(authorKey))
+            return BadRequest(ReponseDto.Create(HttpStatusCode.BadRequest, "É necessário informar a chave do autor."));
+
+        var result = await _service.GetAuthorBioAsync(authorKey, cancellationToken);
+
+        if (result == null)
+            return NotFound(ReponseDto.Create(HttpStatusCode.NotFound, "Biografia não encontrada para o autor informado."));
+
+        return Ok(ReponseDto.Create(HttpStatusCode.OK, "Biografia obtida com sucesso", result));
     }
 }

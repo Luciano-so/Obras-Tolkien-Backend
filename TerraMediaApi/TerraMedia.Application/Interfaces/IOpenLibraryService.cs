@@ -4,5 +4,6 @@ namespace TerraMedia.Application.Interfaces;
 
 public interface IOpenLibraryService
 {
-    Task<OpenLibrarySearchDto> SearchBooksAsync(string author, string title, int page = 1, int limit = 10);
+    Task<OpenLibrarySearchDto> SearchBooksAsync(string? author, int page = 1, int limit = 10, CancellationToken cancellationToken = default);
+    Task<OpenLibraryAuthorDto?> GetAuthorBioAsync(string authorKey, CancellationToken cancellationToken = default);
 }

@@ -18,22 +18,29 @@ public class OpenLibraryClient : IOpenLibraryClient
         _settings = settings.Value;
     }
 
-    public async Task<OpenLibrarySearchDto?> SearchBooksAsync(string? author, string? title, int page, int limit)
+    public async Task<OpenLibrarySearchDto?> SearchBooksAsync(string? author, int page, int limit, CancellationToken cancellationToken = default)
     {
         var queryParams = new List<string>();
 
         if (!string.IsNullOrWhiteSpace(author))
             queryParams.Add($"author={Uri.EscapeDataString(author)}");
 
-        if (!string.IsNullOrWhiteSpace(title))
-            queryParams.Add($"title={Uri.EscapeDataString(title)}");
-
         queryParams.Add($"page={page}");
         queryParams.Add($"limit={limit}");
 
         var endpoint = $"/search.json?{string.Join("&", queryParams)}";
 
-        return await _httpClient.GetFromJsonAsync<OpenLibrarySearchDto>(endpoint);
+        return await _httpClient.GetFromJsonAsync<OpenLibrarySearchDto>(endpoint, cancellationToken);
+    }
+
+    public async Task<OpenLibraryAuthorDto?> GetAuthorBioAsync(string authorKey, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(authorKey))
+            return null;
+
+        var endpoint = $"/authors/{Uri.EscapeDataString(authorKey)}.json";
+
+        return await _httpClient.GetFromJsonAsync<OpenLibraryAuthorDto>(endpoint, cancellationToken);
     }
 
     public string? GetCoverUrl(string? coverEditionKey, string size = "M")

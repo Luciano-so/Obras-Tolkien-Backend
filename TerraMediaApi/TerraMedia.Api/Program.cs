@@ -13,6 +13,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+builder.Services.CreateDatabasePostgresIfNotExists(builder.Configuration);
 builder.Services.DependencyRegister();
 builder.Services.ApplicationRegister();
 builder.Services.AuthenticationRegister(builder.Configuration);

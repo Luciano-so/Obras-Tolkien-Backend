@@ -78,8 +78,11 @@ namespace TerraMedia.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.Sql(
-                    @"INSERT INTO ""Users""(""Id"", ""Active"", ""CreatedAt"", ""Name"", ""Login"", ""Password"")
-                    VALUES('3fa85f64-5717-4562-b3fc-2c963f66afa6'::uuid, true, '2025-08-05 13:18:16.282', 'Admin', 'Admin', '3kpNbBIPbzwfUCcDDQsRkCSoK8GJ0fNaPO4DB9d1pE0=');");
+                    @"INSERT INTO ""Users""(""Id"", ""Active"", ""CreatedAt"", ""Name"", ""Login"", ""Password"") VALUES
+                    ('3fa85f64-5717-4562-b3fc-2c963f66afa6'::uuid, true, '2025-08-05 13:18:16.282', 'Admin', 'Admin', '3kpNbBIPbzwfUCcDDQsRkCSoK8GJ0fNaPO4DB9d1pE0='),
+                    ('48f0685c-4203-4004-b4dc-c3e1d1ca3a1a'::uuid, true, '2025-08-05 13:18:16.282', 'Luciano', 'Luciano', '3kpNbBIPbzwfUCcDDQsRkCSoK8GJ0fNaPO4DB9d1pE0='),
+                    ('cfe5fcf3-c147-42e9-81d1-ae177426c9be'::uuid, true, '2025-08-05 13:18:16.282', 'Teste', 'Teste', '3kpNbBIPbzwfUCcDDQsRkCSoK8GJ0fNaPO4DB9d1pE0='),
+                    ('26e6518d-a65a-40ab-8ecd-b6d33a224e32'::uuid, true, '2025-08-05 13:18:16.282', 'Joao', 'Joao', '3kpNbBIPbzwfUCcDDQsRkCSoK8GJ0fNaPO4DB9d1pE0=');");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

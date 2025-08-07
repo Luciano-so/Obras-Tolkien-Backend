@@ -14,6 +14,13 @@ public static class DataBaseConfig
     {
         using var serviceScope = app.ApplicationServices.CreateScope();
         var dbContext = serviceScope.ServiceProvider.GetRequiredService<MainContext>();
-        dbContext.Database.Migrate();
+        try
+        {
+            dbContext.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao aplicar migrations: {ex.Message}");
+        }
     }
 }

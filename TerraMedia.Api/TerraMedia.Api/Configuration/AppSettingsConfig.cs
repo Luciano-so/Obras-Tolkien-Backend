@@ -1,7 +1,8 @@
-﻿using TerraMedia.Domain.Settings;
+﻿using System.Diagnostics.CodeAnalysis;
+using TerraMedia.Domain.Settings;
 
 namespace TerraMedia.Api.Configuration;
-
+[ExcludeFromCodeCoverage]
 public static class AppSettingsConfig
 {
     public static void AppSettingsRegister(this IServiceCollection services, IConfiguration configuration)

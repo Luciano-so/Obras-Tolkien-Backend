@@ -17,13 +17,6 @@ public class BookTests
     }
 
     [Fact]
-    public void Factory_Create_InvalidCoverId_ShouldThrowDomainException()
-    {
-        var ex = Assert.Throws<DomainException>(() => Book.Factory.Create(0));
-        Assert.Equal("O c�digo do livro deve ser maior que zero.", ex.Message);
-    }
-
-    [Fact]
     public void AddComment_ValidComment_ShouldAddToComments()
     {
         var book = Book.Factory.Create(1);

@@ -1,6 +1,8 @@
-﻿using TerraMedia.Application.Mappings;
+﻿using System.Diagnostics.CodeAnalysis;
+using TerraMedia.Application.Mappings;
 
 namespace TerraMedia.Api.Configuration;
+[ExcludeFromCodeCoverage]
 public static class AutoMapperConfig
 {
     public static void AutoMapperRegister(this IServiceCollection services)

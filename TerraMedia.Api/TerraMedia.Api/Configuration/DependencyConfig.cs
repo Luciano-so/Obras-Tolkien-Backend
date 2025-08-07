@@ -1,4 +1,5 @@
-﻿using TerraMedia.Application.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using TerraMedia.Application.Interfaces;
 using TerraMedia.Application.Services;
 using TerraMedia.Domain.Contracts.IRepositories;
 using TerraMedia.ExternalServices.OpenLibrary.Services;
@@ -7,6 +8,7 @@ using TerraMedia.Integration.ExternalServices.OpenLibrary.Clients;
 
 namespace TerraMedia.Api.Configuration;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyConfig
 {
     public static void DependencyRegister(this IServiceCollection services)

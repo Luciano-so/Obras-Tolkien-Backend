@@ -1,9 +1,11 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Text.Json;
 using TerraMedia.Application.Dtos;
 
 namespace TerraMedia.Api.Middlewares;
 
+[ExcludeFromCodeCoverage]
 public class UnauthorizedExceptionMiddleware
 {
     private readonly RequestDelegate _next;

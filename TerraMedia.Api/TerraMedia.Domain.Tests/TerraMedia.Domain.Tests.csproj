@@ -9,6 +9,10 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <ExcludeByAttribute>ExcludeFromCodeCoverage</ExcludeByAttribute>
+  </PropertyGroup>	
+	
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="FluentAssertions" Version="8.5.0" />

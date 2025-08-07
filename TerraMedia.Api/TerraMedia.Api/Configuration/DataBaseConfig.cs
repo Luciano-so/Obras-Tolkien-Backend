@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 using TerraMedia.Infrastructure.Persistence.Contexts;
 
 namespace TerraMedia.Api.Configuration;
 
+[ExcludeFromCodeCoverage]
 public static class DataBaseConfig
 {
     public static void DataBaseRegister(this IServiceCollection services, IConfiguration configuration)

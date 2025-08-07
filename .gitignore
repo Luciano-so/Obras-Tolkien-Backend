@@ -261,3 +261,7 @@ __pycache__/
 *.pyc
 
 /BuildReports
+
+BuildReports/
+**/TestResults/
+**/coverage.cobertura.xml

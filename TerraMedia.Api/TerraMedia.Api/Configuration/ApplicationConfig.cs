@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TerraMedia.Api.Configuration;
-
+[ExcludeFromCodeCoverage]
 public static class ApplicationConfig
 {
     public static void ApplicationRegister(this IServiceCollection services)

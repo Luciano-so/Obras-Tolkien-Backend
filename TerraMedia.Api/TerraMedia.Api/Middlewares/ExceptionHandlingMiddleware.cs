@@ -1,10 +1,12 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Text.Json;
 using TerraMedia.Application.Dtos;
 using TerraMedia.Application.Exceptions;
 
 namespace TerraMedia.Api.Middlewares;
 
+[ExcludeFromCodeCoverage]
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;

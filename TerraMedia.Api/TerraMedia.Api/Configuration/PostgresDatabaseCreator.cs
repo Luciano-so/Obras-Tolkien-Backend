@@ -1,7 +1,9 @@
 ﻿using Npgsql;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TerraMedia.Api.Configuration;
 
+[ExcludeFromCodeCoverage]
 public static class PostgresDatabaseCreator
 {
     public static void CreateDatabasePostgresIfNotExists(this IServiceCollection services, IConfiguration configuration)

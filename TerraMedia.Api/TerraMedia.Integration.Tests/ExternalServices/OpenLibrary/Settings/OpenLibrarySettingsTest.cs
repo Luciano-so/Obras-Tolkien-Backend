@@ -1,4 +1,5 @@
-﻿using TerraMedia.Domain.Settings;
+﻿
+using TerraMedia.Integration.ExternalServices.OpenLibrary.Settings;
 
 namespace TerraMedia.Integration.Tests.ExternalServices.OpenLibrary.Settings;
 
@@ -10,11 +11,9 @@ public class OpenLibrarySettingsTest
         var settings = new OpenLibrarySettings
         {
             BaseUrl = "URL",
-            CoverBaseUrl = "https://covers.openlibrary.org/b/",
         };
 
         Assert.Equal("URL", settings.BaseUrl);
-        Assert.Equal("https://covers.openlibrary.org/b/", settings.CoverBaseUrl);
     }
 
     [Fact]
@@ -23,6 +22,5 @@ public class OpenLibrarySettingsTest
         var settings = new OpenLibrarySettings();
 
         Assert.Equal(string.Empty, settings.BaseUrl);
-        Assert.Equal(string.Empty, settings.CoverBaseUrl);
     }
 }

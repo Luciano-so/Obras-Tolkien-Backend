@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace TerraMedia.Api.Configuration;
-
+[ExcludeFromCodeCoverage]
 public static class AuthenticationConfig
 {
     public static void AuthenticationRegister(this IServiceCollection services, IConfiguration configuration)

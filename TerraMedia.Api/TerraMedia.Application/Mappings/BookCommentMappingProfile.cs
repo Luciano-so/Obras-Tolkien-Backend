@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using System.Diagnostics.CodeAnalysis;
 using TerraMedia.Application.Dtos;
 using TerraMedia.Domain.Entities;
 
 namespace TerraMedia.Application.Mappings;
-
+[ExcludeFromCodeCoverage]
 public class BookCommentMappingProfile : Profile
 {
     public BookCommentMappingProfile()

@@ -47,7 +47,7 @@ public class BooksControllerTests
         var result = await _controller.CreateWithComment(coverId, commentDto);
 
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto<BookDto>>(okResult.Value);
+        var responseDto = Assert.IsType<ResponseDto<BookDto>>(okResult.Value);
 
         Assert.Equal(HttpStatusCode.Created, responseDto.StatusCode);
         Assert.Equal("Comentário cadastrado com sucesso", responseDto.Message);
@@ -70,7 +70,7 @@ public class BooksControllerTests
         var result = await _controller.AddComment(bookId, commentDto);
 
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto<BookDto>>(okResult.Value);
+        var responseDto = Assert.IsType<ResponseDto<BookDto>>(okResult.Value);
 
         Assert.Equal(HttpStatusCode.OK, responseDto.StatusCode);
         Assert.Equal("Comentário cadastrado com sucesso", responseDto.Message);
@@ -94,7 +94,7 @@ public class BooksControllerTests
         var result = await _controller.UpdateComment(bookId, commentId, commentDto);
 
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto<BookDto>>(okResult.Value);
+        var responseDto = Assert.IsType<ResponseDto<BookDto>>(okResult.Value);
 
         Assert.Equal(HttpStatusCode.OK, responseDto.StatusCode);
         Assert.Equal("Comentário atualizado com sucesso", responseDto.Message);
@@ -122,7 +122,7 @@ public class BooksControllerTests
         var result = await _controller.RemoveComment(bookId, commentId);
 
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto>(okResult.Value);
+        var responseDto = Assert.IsType<ResponseDto>(okResult.Value);
 
         Assert.Equal(HttpStatusCode.NoContent, responseDto.StatusCode);
         Assert.Equal("Comentário removido com sucesso", responseDto.Message);
@@ -143,7 +143,7 @@ public class BooksControllerTests
         var result = await _controller.GetBook(coverId);
 
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto<BookDto>>(okResult.Value);
+        var responseDto = Assert.IsType<ResponseDto<BookDto>>(okResult.Value);
 
         Assert.Equal(HttpStatusCode.OK, responseDto.StatusCode);
         Assert.Equal("Informações carregadas com sucesso.", responseDto.Message);
@@ -164,7 +164,7 @@ public class BooksControllerTests
         var result = await _controller.GetBook(coverId);
 
         var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto>(notFoundResult.Value);
+        var responseDto = Assert.IsType<ResponseDto>(notFoundResult.Value);
 
         Assert.Equal(HttpStatusCode.NotFound, responseDto.StatusCode);
         Assert.Equal("Livro não encontrado.", responseDto.Message);

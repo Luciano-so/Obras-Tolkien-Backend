@@ -30,6 +30,9 @@ public class User : Entity
 
     public void Deactivate() => Active = false;
 
+    public void ChangeStatus(bool status) => Active = status;
+
+
     public void ValidPassword(string newPassword)
     {
         Validation.ValidateIfEmpty(newPassword, "O campo Senha não pode estar vazio.");

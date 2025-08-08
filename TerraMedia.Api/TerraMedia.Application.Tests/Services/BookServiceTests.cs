@@ -116,6 +116,58 @@ public class BookServiceTests
         _mockRepository.Verify(r => r.UnitOfWork.Commit(), Times.Once);
     }
 
+
+    [Fact]
+    public async Task CreateCommentAsync_ValidData_UpdatesComment()
+    {
+
+        var userId = Guid.NewGuid();
+        var commentDto = new CommentDto { Comment = "Updated comment!" };
+        var book = Book.Factory.Create(1);
+
+        var id = Guid.NewGuid();
+        var createdAt = DateTime.UtcNow.AddHours(-1);
+        var updatedAt = DateTime.UtcNow;
+        var userName = "John Doe";
+        var commentText = "This is a comment.";
+        var isNew = true;
+
+        var bookCommentDto = new BookCommentDto
+        {
+            Id = id,
+            BookId = book.Id,
+            UserId = userId,
+            CreatedAt = createdAt,
+            UpdatedAt = updatedAt,
+            User = userName,
+            Comment = commentText,
+            IsNew = isNew
+        };
+
+
+        var existingComment = BookComment.Factory.Create(userId, book, "Initial comment");
+        book.AddComment(existingComment);
+
+        _mockRepository.Setup(r => r.GetByIdWithCommentsAsync(book.Id)).ReturnsAsync(book);
+        _mockRepository.Setup(r => r.GetBook(book.CoverId)).ReturnsAsync(book);
+        _mockMapper.Setup(m => m.Map<BookDto>(It.IsAny<Book>())).Returns(new BookDto { Id = book.Id });
+        _mockMapper.Setup(m => m.Map<CommentDto>(It.IsAny<BookCommentDto>()))
+                        .Returns((BookCommentDto dto) => new CommentDto
+                        {
+                            Comment = dto.Comment
+                        });
+
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        unitOfWorkMock.Setup(u => u.Commit()).ReturnsAsync(true);
+        _mockRepository.Setup(r => r.UnitOfWork).Returns(unitOfWorkMock.Object);
+
+        var result = await _bookService.CreateBookWithCommentAsync(1, userId, bookCommentDto);
+
+        Assert.NotNull(result);
+        _mockRepository.Verify(r => r.UnitOfWork.Commit(), Times.Once);
+    }
+
+
     [Fact]
     public async Task RemoveCommentAsync_ValidData_RemovesComment()
     {

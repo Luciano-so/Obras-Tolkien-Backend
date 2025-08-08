@@ -10,6 +10,7 @@ public static class AutoMapperConfig
         services.AddAutoMapper(cfg =>
         {
             cfg.AddProfile<BookMappingProfile>();
+            cfg.AddProfile<UserMappingProfile>();
             cfg.AddProfile<BookCommentMappingProfile>();
         });
     }

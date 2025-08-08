@@ -18,6 +18,7 @@ public class ExceptionHandlingMiddleware
         _logger = logger;
     }
 
+
     public async Task Invoke(HttpContext context)
     {
         try
@@ -27,29 +28,29 @@ public class ExceptionHandlingMiddleware
         catch (BusinessException ex)
         {
             _logger.LogWarning(ex, "Erro de regra de negocio capturado.");
-
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Response.ContentType = "application/json";
-
-            var response = ReponseDto.Create(HttpStatusCode.BadRequest, ex.Message);
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            var json = JsonSerializer.Serialize(response, options);
-            await context.Response.WriteAsync(json);
+            await WriteErrorResponse(context, HttpStatusCode.BadRequest, ex.Message);
+        }
+        catch (AppException ex)
+        {
+            _logger.LogWarning(ex, "Erro de validação.");
+            await WriteErrorResponse(context, HttpStatusCode.BadRequest, ex.Message);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Erro inesperado.");
-
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            context.Response.ContentType = "application/json";
-
-            var response = ReponseDto.Create(HttpStatusCode.InternalServerError, "Ocorreu um erro interno no servidor.");
-            var json = JsonSerializer.Serialize(response);
-            await context.Response.WriteAsync(json);
+            await WriteErrorResponse(context, HttpStatusCode.InternalServerError, "Ocorreu um erro interno no servidor.");
         }
+    }
+
+    private static async Task WriteErrorResponse(HttpContext context, HttpStatusCode statusCode, string message)
+    {
+        context.Response.StatusCode = (int)statusCode;
+        context.Response.ContentType = "application/json";
+
+        var response = ResponseDto.Create(statusCode, message);
+        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        var json = JsonSerializer.Serialize(response, options);
+
+        await context.Response.WriteAsync(json);
     }
 }

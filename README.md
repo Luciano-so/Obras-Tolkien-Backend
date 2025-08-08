@@ -71,6 +71,10 @@ Informações não padronizadas
 Para executar os testes com coleta de cobertura:
 
 ```bash
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
+```bash
 dotnet test TerraMedia.Api.sln --collect:"XPlat Code Coverage"
 ```
 

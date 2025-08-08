@@ -42,7 +42,7 @@ public class OpenLibraryControllerTests
         var result = await _controller.Search(author, page, limit);
 
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto<OpenLibrarySearchDto>>(okResult.Value);
+        var responseDto = Assert.IsType<ResponseDto<OpenLibrarySearchDto>>(okResult.Value);
 
         Assert.Equal(HttpStatusCode.OK, responseDto.StatusCode);
         Assert.Equal("Busca realizada com sucesso", responseDto.Message);
@@ -59,7 +59,7 @@ public class OpenLibraryControllerTests
         var result = await _controller.Search(author, 1, 10);
 
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto>(badRequestResult.Value);
+        var responseDto = Assert.IsType<ResponseDto>(badRequestResult.Value);
 
         Assert.Equal(HttpStatusCode.BadRequest, responseDto.StatusCode);
         Assert.Equal("É necessário informar o autor.", responseDto.Message);
@@ -75,7 +75,7 @@ public class OpenLibraryControllerTests
         var result = await _controller.GetAuthorBio(authorKey);
 
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-        var responseDto = Assert.IsType<ReponseDto>(badRequestResult.Value);
+        var responseDto = Assert.IsType<ResponseDto>(badRequestResult.Value);
 
         Assert.Equal(HttpStatusCode.BadRequest, responseDto.StatusCode);
         Assert.Equal("É necessário informar a chave do autor.", responseDto.Message);

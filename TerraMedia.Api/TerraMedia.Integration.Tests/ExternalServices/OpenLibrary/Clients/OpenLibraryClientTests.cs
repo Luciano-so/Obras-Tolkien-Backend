@@ -76,4 +76,130 @@ public class OpenLibraryClientTests
 
         Assert.NotNull(result);
     }
+
+    [Fact]
+    public async Task GetAuthorBioAsync_ReturnsDto_WhenResponseNull()
+    {
+        var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        handlerMock.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync",
+                ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = JsonContent.Create(new { }),
+            });
+
+        var client = CreateClient(handlerMock.Object);
+
+        var result = await client.GetAuthorBioAsync("");
+
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void GetCoverUrl_Returns_Null()
+    {
+        var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        handlerMock.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync",
+                ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = JsonContent.Create(new { }),
+            });
+
+        var client = CreateClient(handlerMock.Object);
+
+        var result = client.GetCoverUrl("");
+
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void GetCoverUrl_Returns_Size_S()
+    {
+        var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        handlerMock.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync",
+                ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = JsonContent.Create(new { }),
+            });
+
+        var client = CreateClient(handlerMock.Object);
+
+        var result = client.GetCoverUrl("XXX", "S");
+
+        Assert.NotNull(result);
+    }
+
+    [Fact]
+    public void GetCoverUrl_Returns_Size_M()
+    {
+        var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        handlerMock.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync",
+                ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = JsonContent.Create(new { }),
+            });
+
+        var client = CreateClient(handlerMock.Object);
+
+        var result = client.GetCoverUrl("XXX", "M");
+
+        Assert.NotNull(result);
+    }
+
+    [Fact]
+    public void GetCoverUrl_Returns_Size_L()
+    {
+        var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        handlerMock.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync",
+                ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = JsonContent.Create(new { }),
+            });
+
+        var client = CreateClient(handlerMock.Object);
+
+        var result = client.GetCoverUrl("XXX", "L");
+
+        Assert.NotNull(result);
+    }
+
+    [Fact]
+    public void GetCoverUrl_Returns_Size_O()
+    {
+        var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        handlerMock.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync",
+                ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = JsonContent.Create(new { }),
+            });
+
+        var client = CreateClient(handlerMock.Object);
+
+        var result = client.GetCoverUrl("XXX", "O");
+
+        Assert.NotNull(result);
+    }
 }

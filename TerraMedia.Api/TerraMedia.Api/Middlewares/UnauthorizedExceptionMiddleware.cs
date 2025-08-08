@@ -32,7 +32,7 @@ public class UnauthorizedExceptionMiddleware
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
 
-        var response = ReponseDto.Create(HttpStatusCode.Unauthorized, exception.Message);
+        var response = ResponseDto.Create(HttpStatusCode.Unauthorized, exception.Message);
 
         var options = new JsonSerializerOptions
         {

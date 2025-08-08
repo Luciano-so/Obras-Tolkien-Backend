@@ -33,7 +33,7 @@ public class DomainExceptionMiddleware
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-        var response = ReponseDto.Create(HttpStatusCode.BadRequest, exception.Message);
+        var response = ResponseDto.Create(HttpStatusCode.BadRequest, exception.Message);
         
         var options = new JsonSerializerOptions
         {

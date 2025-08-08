@@ -1,10 +1,8 @@
 ﻿namespace TerraMedia.Application.Dtos;
 
-public class UserDto
+public class CreateUserDto
 {
-    public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Login { get; set; } = string.Empty;
-    public bool Active { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public string Password { get; set; } = string.Empty;
 }

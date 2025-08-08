@@ -96,6 +96,25 @@ public class UserTests
     }
 
     [Fact]
+    public void ValidPassword_ChangeStatus_ShouldUpdatePassword()
+    {
+        var user = User.Factory.Create("Luciano", "luciano", "123456");
+        user.ChangeStatus(false);
+
+        Assert.False(user.Active);
+    }
+
+    [Fact]
+    public void ValidPassword_Encrypt()
+    {
+        var password = "123456";
+        var user = User.Factory.Create("Luciano", "luciano", password);
+        user.Encrypt();
+
+        Assert.NotEqual(password, user.Password);
+    }
+
+    [Fact]
     public void ValidPassword_EmptyNewPassword_ShouldThrowDomainException()
     {
         var user = User.Factory.Create("Luciano", "luciano", "123456");

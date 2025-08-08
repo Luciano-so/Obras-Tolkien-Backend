@@ -17,7 +17,7 @@ public static class DependencyConfig
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddScoped<IBookService, BookService>();
-        services.AddScoped<IAuthenticateService, AuthenticateService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IBookCommentRulesService, BookCommentRulesService>();
         services.AddScoped<IOpenLibraryService, OpenLibraryService>();
 

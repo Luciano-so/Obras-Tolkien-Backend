@@ -16,10 +16,18 @@ public class UserRepository : IUserRepository
     public async Task AddAsync(User user) => await _context.Users.AddAsync(user);
 
     public void Update(User user) => _context.Users.Update(user);
+    public async Task<User?> FindAsync(Guid userId) => await _context.Users.FindAsync(userId);
+
+    public async Task<List<User>> GetAllAsync() => await _context.Users.AsNoTracking().ToListAsync();
     public void Remove(User user) => _context.Users.Remove(user);
 
     public async Task<User?> Authenticate(string login, string password)
     {
         return await _context.Users.FirstOrDefaultAsync(t => t.Login.Trim().ToUpper() == login.Trim().ToUpper() && t.Password == password);
+    }
+
+    public async Task<bool> ExistsUser(string login)
+    {
+        return await _context.Users.AnyAsync(t => t.Login.Trim().ToUpper() == login.Trim().ToUpper());
     }
 }

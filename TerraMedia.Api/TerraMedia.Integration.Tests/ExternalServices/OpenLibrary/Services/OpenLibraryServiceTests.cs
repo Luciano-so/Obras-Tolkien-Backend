@@ -128,5 +128,28 @@ namespace TerraMedia.Integration.Tests.ExternalServices.OpenLibrary.Services
             Assert.Equal("Author Name", result.Name);
             Assert.Equal("Biography", result.Bio);
         }
+
+        [Fact]
+        public async Task SearchBooksAsync_WithNullDocs_ShouldReturnEmptyDocDto()
+        {
+            var searchDto = new OpenLibrarySearchDto { Docs = null };
+
+            _clientMock
+                .Setup(c => c.SearchBooksAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(searchDto);
+
+            var result = await _service.SearchBooksAsync("Some Author");
+
+            Assert.NotNull(result);
+            Assert.True(result.Docs.Count == 0);
+        }
+
+        [Fact]
+        public async Task SearchBooksAsync_WithNullDocs_ShouldReturnresutNullDocDto()
+        {
+            var result = await _service.SearchBooksAsync("Some Author");
+
+            Assert.NotNull(result);
+        }
     }
 }

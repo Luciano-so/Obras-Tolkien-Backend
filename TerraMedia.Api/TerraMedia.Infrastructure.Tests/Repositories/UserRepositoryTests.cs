@@ -79,4 +79,28 @@ public class UserRepositoryTests : IClassFixture<DataBaseTestFixture>
 
         Assert.Null(authenticatedUser);
     }
+
+    [Fact]
+    public async Task Authenticate_ExistsUser()
+    {
+        var user = User.Factory.Create("Nome", "login", "senha123");
+        await _repository.AddAsync(user);
+        await _fixture.Context.SaveChangesAsync();
+
+        var authenticatedUser = await _repository.ExistsUser("login");
+
+        Assert.True(authenticatedUser);
+    }
+
+    [Fact]
+    public async Task Authenticate_GetAllAsync()
+    {
+        var user = User.Factory.Create("Nome", "login", "senha123");
+        await _repository.AddAsync(user);
+        await _fixture.Context.SaveChangesAsync();
+
+        var authenticatedUser = await _repository.GetAllAsync();
+
+        Assert.True(authenticatedUser.Count > 0);
+    }
 }

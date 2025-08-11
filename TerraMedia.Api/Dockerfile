@@ -11,6 +11,9 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 
+# Atualiza os certificados raiz para HTTPS funcionar corretamente
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+
 COPY --from=build /app/TerraMedia.Api/out ./
 
 EXPOSE 7077

@@ -25,11 +25,11 @@ var app = builder.Build();
 app.UseCors("AllowFrontend");
 app.DataBaseRegister();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Terra Media API V1");
+});
 
 app.UseRouting();
 
